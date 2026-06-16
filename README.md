@@ -15,6 +15,7 @@ To-Do:
         - Produces Flowers.
         - Spreads quickly.
         - Burns quickly.
+        - Floats in midair.
     - Flowers
         - Burns instantly.
     - Smoke
