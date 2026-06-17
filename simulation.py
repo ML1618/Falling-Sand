@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys, random
 from grid import Grid
 from particle import Sand, Rock
 
@@ -14,11 +14,13 @@ class Simulation:
 
     def add_particle(self, row, col):
         if self.mode == "sand":
-            particle = Sand
+            if self.brush_size > 1:
+                if random.random() < 0.15:
+                    self.grid.add_particle(row, col, Sand)
+            elif random.random() < 0.45:
+                self.grid.add_particle(row, col, Sand)
         elif self.mode == "rock":
-            particle =  Rock
-
-        self.grid.add_particle(row, col, particle)
+            self.grid.add_particle(row, col, Rock)
 
     def remove_particle(self, row, col):
         self.grid.remove_particle(row, col)
