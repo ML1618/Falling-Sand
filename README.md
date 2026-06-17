@@ -6,6 +6,9 @@ Particle effects:
     - If cell below is empty, move down.
     - If either cells to diagonal down left/right are empty, move to one of them. If both are empty, pick one at random.
     - If neither of the above happen, don't move anywhere.
+- Rock
+    - No special interactions with any other particles.
+    - Floats in midair.
 
 Controls:
 - Restart
@@ -14,9 +17,11 @@ Controls:
     - To erase particles, press `e` or `E`.
 - Sand
     - To swap to sand particles, press `1`.
+- Rock
+    - To swap to rock particles, press `2`.
 
 To-Do:
-- At some point, maybe add other things like Fire, Wood, Greenery, Flowers, Smoke, Steam, Water, Stone...
+- At some point, maybe add other things like Fire, Wood, Greenery, Flowers, Smoke, Steam, Water...
     - Fire
         - Consumes Wood.
         - Spreads on Wood and Greenery.
@@ -42,6 +47,3 @@ To-Do:
         - Produces Steam when in contact with fire.
         - Falls.
         - Fits shape of container.
-    - Stone
-        - Floats in midair.
-        - No reactions with anything else.
