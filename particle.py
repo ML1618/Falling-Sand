@@ -2,15 +2,7 @@ import random, colorsys
 
 class Sand:
     def __init__(self):
-        self.colour = self.random_colour()
-
-    def random_colour(self):
-        hue = random.uniform(0.1, 0.12)
-        saturation = random.uniform(0.5, 0.7)
-        value = random.uniform(0.6, 0.8)
-
-        r, g, b, = colorsys.hsv_to_rgb(hue, saturation, value)
-        return int(r * 255), int(g * 255), int(b * 255)
+        self.colour = random_colour((0.1, 0.12), (0.5, 0.7), (0.7, 0.9))
     
     def update(self, grid, row, col):
         # if grid.is_empty(row + 1, col):
@@ -32,3 +24,15 @@ class Sand:
                 if grid.cell_is_empty(row + 1, col + offset):
                     return row + 1, col + offset
         return row, col
+    
+class Rock:
+    def __init__(self):
+        self.colour = random_colour((0.0, 0.1), (0.1, 0.3), (0.3, 0.5))
+
+def random_colour(hue_range, saturation_range, value_range):
+    hue = random.uniform(*hue_range)
+    saturation = random.uniform(*saturation_range)
+    value = random.uniform(*value_range)
+
+    r, g, b, = colorsys.hsv_to_rgb(hue, saturation, value)
+    return int(r * 255), int(g * 255), int(b * 255)

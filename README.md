@@ -11,6 +11,8 @@ Particle effects:
     - Floats in midair.
 
 Controls:
+- Quit
+    - To quit the simulation, press `Esc` or 
 - Restart
     - To restart the simulation, press `r` or `R`.
 - Erase

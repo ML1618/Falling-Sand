@@ -1,17 +1,23 @@
 import pygame, sys
 from grid import Grid
-from particle import Sand
+from particle import Sand, Rock
 
 class Simulation:
     def __init__(self, width, height, cell_size):
         self.grid = Grid(width, height, cell_size)
         self.cell_size = cell_size
+        self.mode = "sand"
 
     def draw(self, window):
         self.grid.draw(window)
 
     def add_particle(self, row, col):
-        self.grid.add_particle(row, col, Sand)
+        if self.mode == "sand":
+            particle = Sand
+        elif self.mode == "rock":
+            particle =  Rock
+
+        self.grid.add_particle(row, col, particle)
 
     def remove_particle(self, row, col):
         self.grid.remove_particle(row, col)
@@ -20,7 +26,7 @@ class Simulation:
         for row in range(self.grid.rows - 2, -1, -1):
             for col in range(self.grid.cols):
                 particle = self.grid.get_cell(row, col)
-                if particle is not None:
+                if isinstance(particle, Sand):
                     new_pos = particle.update(self.grid, row, col)
                     if new_pos != (row, col):
                         self.grid.set_cell(new_pos[0], new_pos[1], particle)
@@ -40,15 +46,22 @@ class Simulation:
         self.handle_mouse()
 
     def handle_key(self, event):
+        if event.key == pygame.K_ESCAPE:
+            pygame.quit()
+            sys.exit()
+            print("exiting simulation")
         if event.key == pygame.K_r:
             print("reset simulation")
             self.restart()
         elif event.key == pygame.K_e:
             print("erase mode")
+            self.mode = "erase"
         elif event.key == pygame.K_1:
             print("sand mode")
+            self.mode = "sand"
         elif event.key == pygame.K_2:
             print("rock mode")
+            self.mode = "rock"
 
     def handle_mouse(self):
         buttons = pygame.mouse.get_pressed()
