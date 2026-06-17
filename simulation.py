@@ -13,3 +13,16 @@ class Simulation:
 
     def remove_particle(self, row, col):
         self.grid.remove_particle(row, col)
+
+    def update(self):
+        for row in range(self.grid.rows - 2, -1, -1):
+            for col in range(self.grid.cols):
+                particle = self.grid.get_cell(row, col)
+                if particle is not None:
+                    new_pos = particle.update(self.grid, row, col)
+                    if new_pos != (row, col):
+                        self.grid.set_cell(new_pos[0], new_pos[1], particle)
+                        self.grid.remove_particle(row, col)
+    
+    def restart(self):
+        self.grid.clear()

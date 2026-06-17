@@ -1,6 +1,20 @@
 # Falling-Sand
 This is a falling sand simulation, built with Pygame and Python.
 
+Particle effects:
+- Sand
+    - If cell below is empty, move down.
+    - If either cells to diagonal down left/right are empty, move to one of them. If both are empty, pick one at random.
+    - If neither of the above happen, don't move anywhere.
+
+Controls:
+- Restart
+    - To restart the simulation, press `r` or `R`.
+- Erase
+    - To erase particles, press `e` or `E`.
+- Sand
+    - To swap to sand particles, press `1`.
+
 To-Do:
 - At some point, maybe add other things like Fire, Wood, Greenery, Flowers, Smoke, Steam, Water, Stone...
     - Fire
