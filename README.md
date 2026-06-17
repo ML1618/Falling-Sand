@@ -15,6 +15,10 @@ Controls:
     - To quit the simulation, press `Esc` or 
 - Restart
     - To restart the simulation, press `r` or `R`.
+- Increase brush size
+    - To increase brush size, press `.`. Maximum brush size is capped at 10.
+- Decrease brush size
+    - To decrease brush size, press `,`. Minimum brush size is capped at 1.
 - Erase
     - To erase particles, press `e` or `E`.
 - Sand

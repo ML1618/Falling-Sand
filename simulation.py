@@ -7,6 +7,7 @@ class Simulation:
         self.grid = Grid(width, height, cell_size)
         self.cell_size = cell_size
         self.mode = "sand"
+        self.brush_size = 3
 
     def draw(self, window):
         self.grid.draw(window)
@@ -50,9 +51,21 @@ class Simulation:
             pygame.quit()
             sys.exit()
             print("exiting simulation")
-        if event.key == pygame.K_r:
+        elif event.key == pygame.K_r:
             print("reset simulation")
             self.restart()
+        elif event.key == pygame.K_PERIOD:
+            if self.brush_size < 10:
+                print("brush size increasing by 1")
+                self.brush_size += 1
+            else:
+                print("brush size is already at max")
+        elif event.key == pygame.K_COMMA:
+            if self.brush_size > 1:
+                print("brush size decreasing by 1")
+                self.brush_size -= 1
+            else:
+                print("brush size is already at min")
         elif event.key == pygame.K_e:
             print("erase mode")
             self.mode = "erase"
@@ -70,7 +83,15 @@ class Simulation:
             col = pos[0] // self.cell_size
             row = pos[1] // self.cell_size
             
-            if self.mode == "erase":
-                self.grid.remove_particle(row, col)
-            else:
-                self.add_particle(row, col)
+            self.apply_brush(row, col)
+    
+    def apply_brush(self, row, col):
+        for i in range(self.brush_size):
+            for j in range(self.brush_size):
+                current_row = row + i
+                current_col = col + j
+
+                if self.mode == "erase":
+                    self.grid.remove_particle(current_row, current_col)
+                else:
+                    self.add_particle(current_row, current_col)
