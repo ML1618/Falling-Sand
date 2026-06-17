@@ -2,6 +2,7 @@ import pygame, sys, random
 from grid import Grid
 from particle import Sand, Rock
 
+
 class Simulation:
     def __init__(self, width, height, cell_size):
         self.grid = Grid(width, height, cell_size)
@@ -11,6 +12,7 @@ class Simulation:
 
     def draw(self, window):
         self.grid.draw(window)
+        self.draw_brush(window)
 
     def add_particle(self, row, col):
         if self.mode == "sand":
@@ -39,7 +41,7 @@ class Simulation:
                     if new_pos != (row, col):
                         self.grid.set_cell(new_pos[0], new_pos[1], particle)
                         self.grid.remove_particle(row, col)
-    
+
     def restart(self):
         self.grid.clear()
 
@@ -86,13 +88,13 @@ class Simulation:
 
     def handle_mouse(self):
         buttons = pygame.mouse.get_pressed()
-        if buttons[0]: # Left mouse button
+        if buttons[0]:  # Left mouse button
             pos = pygame.mouse.get_pos()
             col = pos[0] // self.cell_size
             row = pos[1] // self.cell_size
-            
+
             self.apply_brush(row, col)
-    
+
     def apply_brush(self, row, col):
         for i in range(self.brush_size):
             for j in range(self.brush_size):
@@ -103,3 +105,29 @@ class Simulation:
                     self.grid.remove_particle(current_row, current_col)
                 else:
                     self.add_particle(current_row, current_col)
+
+    def draw_brush(self, window):
+        mouse_pos = pygame.mouse.get_pos()
+        col = mouse_pos[0] // self.cell_size
+        row = mouse_pos[1] // self.cell_size
+
+        brush_visual_size = self.brush_size * self.cell_size
+        colour = (255, 255, 255)
+
+        if self.mode == "rock":
+            colour = (100, 100, 100)
+        elif self.mode == "sand":
+            colour = (185, 142, 66)
+        elif self.mode == "erase":
+            colour = (255, 105, 180)
+
+        pygame.draw.rect(
+            window,
+            colour,
+            (
+                col * self.cell_size,
+                row * self.cell_size,
+                brush_visual_size,
+                brush_visual_size,
+            ),
+        )

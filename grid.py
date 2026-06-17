@@ -1,5 +1,6 @@
 import pygame
 
+
 class Grid:
     def __init__(self, width, height, cell_size):
         self.rows = height // cell_size
@@ -27,7 +28,11 @@ class Grid:
                     )
 
     def add_particle(self, row, col, particle_type):
-        if 0 <= row < self.rows and 0 <= col < self.cols and self.cell_is_empty(row, col):
+        if (
+            0 <= row < self.rows
+            and 0 <= col < self.cols
+            and self.cell_is_empty(row, col)
+        ):
             self.cells[row][col] = particle_type()
 
     def remove_particle(self, row, col):

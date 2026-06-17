@@ -2,23 +2,24 @@ import pygame
 from simulation import Simulation
 
 pygame.init()
+pygame.mouse.set_visible(False)
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
 
-CELL_SIZE = 6 # Size of each cell in pixels
+CELL_SIZE = 6  # Size of each cell in pixels
 
 BLACK = (0, 0, 0)
 DARK_GREY = (29, 29, 29)
 
 FPS_CAP = 60
 
-window = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Falling sands simulation")
 
 clock = pygame.time.Clock()
 
-simulation = Simulation(SCREEN_WIDTH, SCREEN_HEIGHT, CELL_SIZE)
+simulation = Simulation(WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
 
 #####################
 # Simulation loop
