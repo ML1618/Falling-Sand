@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame
 from simulation import Simulation
 
 pygame.init()
@@ -26,28 +26,8 @@ simulation = Simulation(SCREEN_WIDTH, SCREEN_HEIGHT, CELL_SIZE)
 
 while True:
     # Event handling
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+    simulation.handle_controls()
 
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_r:
-                simulation.restart()
-            elif event.key == pygame.K_e:
-                print("erase mode")
-            elif event.key == pygame.K_1:
-                print("sand mode")
-            elif event.key == pygame.K_2:
-                print("rock mode")
-            
-
-    buttons = pygame.mouse.get_pressed()
-    if buttons[0]: # Left mouse button
-        pos = pygame.mouse.get_pos()
-        mouse_y = pos[0] // CELL_SIZE
-        mouse_x = pos[1] // CELL_SIZE
-        simulation.add_particle(mouse_x, mouse_y)
     # Updating state
     simulation.update()
 
