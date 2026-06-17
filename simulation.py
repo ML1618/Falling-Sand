@@ -67,6 +67,10 @@ class Simulation:
         buttons = pygame.mouse.get_pressed()
         if buttons[0]: # Left mouse button
             pos = pygame.mouse.get_pos()
-            mouse_y = pos[0] // self.cell_size
-            mouse_x = pos[1] // self.cell_size
-            self.add_particle(mouse_x, mouse_y)
+            col = pos[0] // self.cell_size
+            row = pos[1] // self.cell_size
+            
+            if self.mode == "erase":
+                self.grid.remove_particle(row, col)
+            else:
+                self.add_particle(row, col)
