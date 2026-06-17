@@ -7,7 +7,7 @@ class Simulation:
         self.grid = Grid(width, height, cell_size)
         self.cell_size = cell_size
         self.mode = "sand"
-        self.brush_size = 3
+        self.brush_size = 1
 
     def draw(self, window):
         self.grid.draw(window)
@@ -25,7 +25,12 @@ class Simulation:
 
     def update(self):
         for row in range(self.grid.rows - 2, -1, -1):
-            for col in range(self.grid.cols):
+            if row % 2 == 0:
+                col_range = range(self.grid.cols)
+            else:
+                col_range = reversed(range(self.grid.cols))
+
+            for col in col_range:
                 particle = self.grid.get_cell(row, col)
                 if isinstance(particle, Sand):
                     new_pos = particle.update(self.grid, row, col)
@@ -53,6 +58,7 @@ class Simulation:
             print("exiting simulation")
         elif event.key == pygame.K_r:
             print("reset simulation")
+            self.brush_size = 1
             self.restart()
         elif event.key == pygame.K_PERIOD:
             if self.brush_size < 10:
