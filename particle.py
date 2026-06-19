@@ -32,6 +32,11 @@ class Rock:
         self.colour = random_colour((0.0, 0.1), (0.1, 0.3), (0.3, 0.5))
 
 
+class Wood:
+    def __init__(self):
+        self.colour = random_colour((0.055, 0.11), (0.5, 0.8), (0.3, 0.65))
+
+
 def random_colour(hue_range, saturation_range, value_range):
     hue = random.uniform(*hue_range)
     saturation = random.uniform(*saturation_range)

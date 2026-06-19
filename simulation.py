@@ -1,6 +1,6 @@
 import pygame, sys, random
 from grid import Grid
-from particle import Sand, Rock
+from particle import Sand, Rock, Wood
 
 
 class Simulation:
@@ -23,6 +23,8 @@ class Simulation:
                 self.grid.add_particle(row, col, Sand)
         elif self.mode == "rock":
             self.grid.add_particle(row, col, Rock)
+        elif self.mode == "wood":
+            self.grid.add_particle(row, col, Wood)
 
     def remove_particle(self, row, col):
         self.grid.remove_particle(row, col)
@@ -85,6 +87,9 @@ class Simulation:
         elif event.key == pygame.K_2:
             print("rock mode")
             self.mode = "rock"
+        elif event.key == pygame.K_3:
+            print("wood mode")
+            self.mode = "wood"
 
     def handle_mouse(self):
         buttons = pygame.mouse.get_pressed()
@@ -118,6 +123,8 @@ class Simulation:
             colour = (100, 100, 100)
         elif self.mode == "sand":
             colour = (185, 142, 66)
+        elif self.mode == "wood":
+            colour = (160, 110, 60)
         elif self.mode == "erase":
             colour = (255, 105, 180)
 

@@ -9,6 +9,10 @@ Particle effects:
 - Rock
     - No special interactions with any other particles.
     - Floats in midair.
+- Wood
+    - FLoats in midair.
+    - Burns in contact with Fire.
+    - Produces Greenery in contact with Water.
 
 Controls:
 - Quit
@@ -22,9 +26,11 @@ Controls:
 - Erase
     - To erase particles, press `e` or `E`.
 - Sand
-    - To swap to sand particles, press `1`.
+    - To swap to Sand particles, press `1`.
 - Rock
-    - To swap to rock particles, press `2`.
+    - To swap to Rock particles, press `2`.
+- Wood
+    - To swap to Wood particles, press `3`.
 
 To-Do:
 - At some point, maybe add other things like Fire, Wood, Greenery, Flowers, Smoke, Steam, Water...
