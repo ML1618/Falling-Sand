@@ -6,24 +6,17 @@ class Sand:
         self.colour = random_colour((0.1, 0.12), (0.5, 0.7), (0.7, 0.9))
 
     def update(self, grid, row, col):
-        # if grid.is_empty(row + 1, col):
-        #     grid.set_cell(row + 1, col, self)
-        #     grid.set_cell(row, col, None)
-        # elif grid.is_empty(row + 1, col - 1):
-        #     grid.set_cell(row + 1, col - 1, self)
-        #     grid.set_cell(row, col, None)
-        # elif grid.is_empty(row + 1, col + 1):
-        #     grid.set_cell(row + 1, col + 1, self)
-        #     grid.set_cell(row, col, None)
-
+        # Move down a cell, if it's open
         if grid.cell_is_empty(row + 1, col):
             return row + 1, col
         else:
+            # Pick a cell down a row, randomly to diagonal left/right
             offsets = [-1, 1]
             random.shuffle(offsets)
             for offset in offsets:
                 if grid.cell_is_empty(row + 1, col + offset):
                     return row + 1, col + offset
+        # No options, so stay still
         return row, col
 
 
@@ -35,6 +28,34 @@ class Rock:
 class Wood:
     def __init__(self):
         self.colour = random_colour((0.055, 0.11), (0.5, 0.8), (0.3, 0.65))
+
+
+class Water:
+    def __init__(self):
+        self.colour = random_colour((0.5, 0.5), (0.5, 0.9), (0.7, 0.9))
+
+    def update(self, grid, row, col):
+        # Fall straight down when possible
+        if grid.cell_is_empty(row + 1, col):
+            return row + 1, col
+
+        # Prefer diagonal fall before filling side gaps
+        offsets = [-1, 1]
+        random.shuffle(offsets)
+        for offset in offsets:
+            if grid.cell_is_empty(row + 1, col + offset):
+                return row + 1, col + offset
+
+        # Spread evenly along the current row when supported
+        side_offsets = [-1, 1]
+        random.shuffle(side_offsets)
+        for offset in side_offsets:
+            if grid.cell_is_empty(row, col + offset) and not grid.cell_is_empty(
+                row + 1, col + offset
+            ):
+                return row, col + offset
+
+        return row, col
 
 
 def random_colour(hue_range, saturation_range, value_range):

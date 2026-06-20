@@ -12,7 +12,8 @@ Particle effects:
 - Wood
     - FLoats in midair.
     - Burns in contact with Fire.
-    - Produces Greenery in contact with Water.
+- Water
+    - Falls down.
 
 Controls:
 - Quit
@@ -59,3 +60,7 @@ To-Do:
         - Produces Steam when in contact with fire.
         - Falls.
         - Fits shape of container.
+
+Issues:
+- Water particles fritz on the top of the surface. Unsure how to fix. Maybe delete them? Don't know how to check.
+- Water particles pool on the sides. For each particle, go through and check if there are any empty particles on the row beneath, then move to fill?

@@ -2,6 +2,7 @@ import pygame
 from simulation import Simulation
 
 pygame.init()
+# Hide the mouse so we can use our own indicator for what particle is active
 pygame.mouse.set_visible(False)
 
 WINDOW_WIDTH = 800
@@ -9,7 +10,6 @@ WINDOW_HEIGHT = 600
 
 CELL_SIZE = 6  # Size of each cell in pixels
 
-BLACK = (0, 0, 0)
 DARK_GREY = (29, 29, 29)
 
 FPS_CAP = 60
@@ -21,10 +21,7 @@ clock = pygame.time.Clock()
 
 simulation = Simulation(WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
 
-#####################
 # Simulation loop
-#####################
-
 while True:
     # Event handling
     simulation.handle_controls()

@@ -1,6 +1,6 @@
 import pygame, sys, random
 from grid import Grid
-from particle import Sand, Rock, Wood
+from particle import Sand, Rock, Wood, Water
 
 
 class Simulation:
@@ -25,12 +25,19 @@ class Simulation:
             self.grid.add_particle(row, col, Rock)
         elif self.mode == "wood":
             self.grid.add_particle(row, col, Wood)
+        elif self.mode == "water":
+            if self.brush_size > 1:
+                if random.random() < 0.5:
+                    self.grid.add_particle(row, col, Water)
+            elif random.random() < 0.75:
+                self.grid.add_particle(row, col, Water)
 
     def remove_particle(self, row, col):
         self.grid.remove_particle(row, col)
 
     def update(self):
         for row in range(self.grid.rows - 2, -1, -1):
+            # Alternates traversing from either right or left
             if row % 2 == 0:
                 col_range = range(self.grid.cols)
             else:
@@ -38,7 +45,7 @@ class Simulation:
 
             for col in col_range:
                 particle = self.grid.get_cell(row, col)
-                if isinstance(particle, Sand):
+                if isinstance(particle, Sand) or isinstance(particle, Water):
                     new_pos = particle.update(self.grid, row, col)
                     if new_pos != (row, col):
                         self.grid.set_cell(new_pos[0], new_pos[1], particle)
@@ -59,25 +66,25 @@ class Simulation:
 
     def handle_key(self, event):
         if event.key == pygame.K_ESCAPE:
+            print("exiting simulation")
             pygame.quit()
             sys.exit()
-            print("exiting simulation")
         elif event.key == pygame.K_r:
             print("reset simulation")
             self.brush_size = 1
             self.restart()
         elif event.key == pygame.K_PERIOD:
             if self.brush_size < 10:
-                print("brush size increasing by 1")
+                print(f"brush size increasing by 1 to {self.brush_size}")
                 self.brush_size += 1
             else:
-                print("brush size is already at max")
+                print("brush size is already at max (10)")
         elif event.key == pygame.K_COMMA:
             if self.brush_size > 1:
-                print("brush size decreasing by 1")
+                print(f"brush size decreasing by 1 to {self.brush_size}")
                 self.brush_size -= 1
             else:
-                print("brush size is already at min")
+                print("brush size is already at min (1)")
         elif event.key == pygame.K_e:
             print("erase mode")
             self.mode = "erase"
@@ -90,6 +97,9 @@ class Simulation:
         elif event.key == pygame.K_3:
             print("wood mode")
             self.mode = "wood"
+        elif event.key == pygame.K_4:
+            print("water mode")
+            self.mode = "water"
 
     def handle_mouse(self):
         buttons = pygame.mouse.get_pressed()
@@ -125,6 +135,8 @@ class Simulation:
             colour = (185, 142, 66)
         elif self.mode == "wood":
             colour = (160, 110, 60)
+        elif self.mode == "water":
+            colour = (0, 255, 255)
         elif self.mode == "erase":
             colour = (255, 105, 180)
 
