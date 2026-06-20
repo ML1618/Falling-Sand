@@ -63,4 +63,3 @@ To-Do:
 
 Issues:
 - Water particles fritz on the top of the surface. Unsure how to fix. Maybe delete them? Don't know how to check.
-- Water particles pool on the sides. For each particle, go through and check if there are any empty particles on the row beneath, then move to fill?
