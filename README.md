@@ -47,9 +47,10 @@ To-Do:
         - Produces Flowers.
         - Spreads quickly.
         - Burns quickly.
-        - Floats in midair.
+        - On the Wood.
     - Flowers
         - Burns instantly.
+        - On the Greenery.
     - Smoke
         - Floats upward.
         - Trapped by Wood and Stone.
@@ -63,3 +64,4 @@ To-Do:
 
 Issues:
 - Water particles fritz on the top of the surface. Unsure how to fix. Maybe delete them? Don't know how to check.
+    - Deleting every Water particle that isn't bordered on both the right and left by another particle tends to get rid of way too much Water.
